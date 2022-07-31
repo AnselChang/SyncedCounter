@@ -6,7 +6,7 @@
     <style>
 
       .btn {
-        font-size: 5em;
+        font-size: 3em;
         height: 100%;
         width: 100%;
         touch-action: manipulation;
@@ -17,7 +17,7 @@
       }
 
       .lightred {
-        background-color: : #fa6161;
+        background-color: #fa6161;
       }
 
       .blue {
@@ -33,6 +33,13 @@
       }
 
       .section {
+        padding:3%;
+        back-ground-color: green;
+      }
+
+      .topsection {
+        height: 50%;
+        background-color: yellow;
       }
 
 
@@ -40,17 +47,17 @@
     </style>
   </head>
   <body>
-    <div>
+    <div class="topsection">
 
-      <div class="section" style="width: 49%;float:left">
+      <div class="section" style="width: 44%;float:left">
         <button onclick="incRed()" class="btn red">
-          <p id='redvalue' class="text-center" style="font-size: 5em;">? (+)</p>
+          <p id='redvalue' class="text-center">? (+)</p>
         </button>
         <button onclick="decRed()" class="btn lightred">(-)</button>
       </div>
-      <div class = "section" style="width: 49%;float:right">
+      <div class = "section" style="width: 44%;float:right">
         <button onclick="incBlue()" class="btn blue">
-          <p id='bluevalue' class="text-center" style="font-size: 5em;">? (+)</p>
+          <p id='bluevalue' class="text-center">? (+)</p>
         </button>
         <button onclick="decBlue()" class="btn lightblue">(-)</button>
       </div>
