@@ -30,15 +30,15 @@
     <div class="grid">
       <div><button onclick="incNum1()" class="btn btn-success btn-lg btn-block">☝️</button></div>
       <div><button onclick="decNum1()" class="btn btn-danger btn-lg btn-block">👇</button></div>
-      <div><p id='syncnum1' class="text-center" style="font-size: 5em;">-</p></div>
+      <div><p id='redvalue' class="text-center" style="font-size: 5em;">-</p></div>
 
       <div><button onclick="incNum2()" class="btn btn-success btn-lg btn-block">☝️</button></div>
       <div><button onclick="decNum2()" class="btn btn-danger btn-lg btn-block">👇</button></div>
-      <div><p id='syncnum2' class="text-center" style="font-size: 5em;">-</p></div>
+      <div><p id='bluevalue' class="text-center" style="font-size: 5em;">-</p></div>
 
       <div><button onclick="incNum3()" class="btn btn-success btn-lg btn-block">☝️</button></div>
       <div><button onclick="decNum3()" class="btn btn-danger btn-lg btn-block">👇</button></div>
-      <div><p id='syncnum3' class="text-center" style="font-size: 5em;">-</p></div>
+      <div><p id='midvalue' class="text-center" style="font-size: 5em;">-</p></div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -47,36 +47,36 @@
       var socket = io();
 
       document.addEventListener("DOMContentLoaded", function(event) {
-        socket.on('server broadcast', function (syncnum1, syncnum2, syncnum3) {
-          document.getElementById('syncnum1').innerHTML = syncnum1;
-          document.getElementById('syncnum2').innerHTML = syncnum2;
-          document.getElementById('syncnum3').innerHTML = syncnum3;
+        socket.on('server broadcast', function (values) {
+          document.getElementById('redvalue').innerHTML = values["red"];
+          document.getElementById('bluevalue').innerHTML = values["blue"];
+          document.getElementById('midvalue').innerHTML = values["mid"];
           console.log("I've received the numbers!");
         });
       });
 
       function incNum1(){
-        socket.emit('inc num1');
+        socket.emit("button", "red", 1);
       }
 
       function incNum2(){
-        socket.emit('inc num2');
+        socket.emit("button", "blue", 1);
       }
 
       function incNum3(){
-        socket.emit('inc num3');
+        socket.emit("button", "mid", 1);
       }
 
       function decNum1(){
-        socket.emit('dec num1');
+        socket.emit("button", "red", -1);
       }
 
       function decNum2(){
-        socket.emit('dec num2');
+        socket.emit("button", "blue", -1);
       }
 
       function decNum3(){
-        socket.emit('dec num3');
+        socket.emit("button", "mid", -1);
       }
 
     </script>
