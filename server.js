@@ -5,14 +5,9 @@ var port = process.env.PORT || 3000;
 
 console.log("start");
 
-let syncnum1 = 0;
-let syncnum2 = 0;
-let syncnum3 = 0;
-
 var values = {
   "red" : 0,
   "blue" : 0,
-  "mid" : 0
 };
 
 app.get('/', (req,res) => {
