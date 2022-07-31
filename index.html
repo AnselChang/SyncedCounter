@@ -23,12 +23,6 @@
         /*background-color: #ccc;*/
       }
 
-    /* Clear floats after the columns */
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
     </style>
   </head>
   <body>
@@ -46,7 +40,7 @@
       <div><p id='syncnum3' class="text-center" style="font-size: 5em;">-</p></div>
     </div>
 
-    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
 
       var socket = io();
