@@ -8,6 +8,7 @@ console.log("start");
 var values = {
   "red" : 0,
   "blue" : 0,
+  "mid" : 0,
 };
 
 app.get('/', (req,res) => {
