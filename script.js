@@ -11,12 +11,11 @@ function updateHTML() {
 
     document.getElementById('redtotal').innerHTML = clientValues[RED]["score"];
     document.getElementById('bluetotal').innerHTML = clientValues[BLUE]["score"];
-
-    document.getElementById('redvalue').innerHTML = clientValues[side]["red"] + "<br>(+)";
-    document.getElementById('bluevalue').innerHTML = clientValues[side]["blue"] + "<br>(+)";
-    document.getElementById('midvalue').innerHTML = clientValues[side]["mid"] + "<br>(+)";
+    let scoretypes = ['red','blue','mid','ramp'];
+    for(let i = 0; i<scoretypes.length; i++){
+        document.getElementById(scoretypes[i]+ 'value').innerHTML = clientValues[side][scoretypes[i]] + "<br>(+)";
+    }
     document.getElementById('yelvalue').innerHTML = clientValues[side]["yellow"] + "<br>(+)";
-    document.getElementById('rampvalue').innerHTML = clientValues[side]["ramp"] + "<br>(+)";
     document.getElementById('penvalue').innerHTML = clientValues[side]["penalty"] + "<br>(+)";
 
     if (clientValues[side]["auton"] === 0) {
@@ -34,7 +33,9 @@ function updateHTML() {
     }
 
 }
-
+function resetScoring(){
+    
+}
 document.addEventListener("DOMContentLoaded", function(event) {
     socket.on('server broadcast', function(values) {
 
