@@ -203,12 +203,12 @@
     <div class="container">
 
       <div class="cell redscore">
-        <button onclick="setRed()" class="btn red">
+        <button id="redbutton" onclick="setRed()" class="btn red">
           <p id="redtotal" class="text-center text">?</p>
         </button>
       </div>
       <div class="cell bluescore">
-        <button onclick="setBlue()" class="btn blue">
+        <button id="bluebutton" onclick="setBlue()" class="btn blue">
           <p id="bluetotal" class="text-center text">?</p>
         </button>
       </div>
@@ -344,13 +344,17 @@
 
       function setRed() {
         side = RED;
-        document.getElementById("background").style.backgroundColor = "#FD8888";
+        document.getElementById("background").style.backgroundColor = "#FFBABA";
+        document.getElementById("redbutton").style.borderWidth = "5px";
+        document.getElementById("bluebutton").style.borderWidth = "1px";
         updateHTML();
       }
 
       function setBlue() {
         side = BLUE;
-        document.getElementById("background").style.backgroundColor = "#A0A0FA";
+        document.getElementById("background").style.backgroundColor = "#D2D2FF";
+        document.getElementById("redbutton").style.borderWidth = "1px";
+        document.getElementById("bluebutton").style.borderWidth = "5px";
         updateHTML();
       }
 
