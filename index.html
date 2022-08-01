@@ -6,11 +6,16 @@
     <style>
     .text {
       margin: 2px;
+      font-size: 3em;
       text-align: center;
     }
 
+    .title {
+      font-size: 1em;
+    }
+
     .btn {
-      font-size: 3em;
+
       border-radius: 10px;
       height: 100%;
       width: 100%;
@@ -41,6 +46,30 @@
 
     .lightgreen {
       background-color: #72ED84;
+    }
+
+    .yellow {
+      background-color: #FFF11A;
+    }
+
+    .lightyellow {
+      background-color: #FFF55E;
+    }
+
+    .turq {
+      background-color: #2DF8F0;
+    }
+
+    .lightturq {
+      background-color: #84FDF8;
+    }
+
+    .grey {
+      background-color: #8D8D8D;
+    }
+
+    .lightgrey {
+      background-color: #BCBCBC;
     }
 
     .container {
@@ -92,7 +121,7 @@
       grid-column-start: 2;
       grid-column-end: 3;
       grid-row-start: 3;
-      grid-row-end: 3;
+      grid-row-end: 4;
     }
 
     .midplus {
@@ -106,8 +135,51 @@
       grid-column-start: 3;
       grid-column-end: 4;
       grid-row-start: 3;
-      grid-row-end: 3;
+      grid-row-end: 4;
     }
+
+    .yelplus {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 4;
+      grid-row-end: 5;
+    }
+
+    .yelminus {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 5;
+      grid-row-end: 6;
+    }
+
+    .rampplus {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 4;
+      grid-row-end: 5;
+    }
+
+    .rampminus {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 5;
+      grid-row-end: 6;
+    }
+
+    .penplus {
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 4;
+      grid-row-end: 5;
+    }
+
+    .penminus {
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 5;
+      grid-row-end: 6;
+    }
+
   </style>
   </head>
   <body>
@@ -115,6 +187,7 @@
 
       <div class="cell redplus">
         <button onclick="incRed()" class="btn red">
+          <p class="title">Red Hole (5)</p>
           <p id='redvalue' class="text-center text">? (+)</p>
         </button>
       </div>
@@ -125,6 +198,7 @@
 
       <div class="cell blueplus">
         <button onclick="incBlue()" class="btn blue">
+          <p class="title">Blue Hole (3)</p>
           <p id='bluevalue' class="text-center text">? (+)</p>
         </button>
       </div>
@@ -135,6 +209,7 @@
 
       <div class="cell midplus">
         <button onclick="incMid()" class="btn green">
+          <p class="title">Top Hole (5)</p>
           <p id='midvalue' class="text-center text">? (+)</p>
         </button>
       </div>
@@ -143,8 +218,38 @@
         <button onclick="decMid()" class="btn lightgreen"><p class = "text">(-)</p></button>
       </div>
 
+      <div class="cell yelplus">
+        <button onclick="incYel()" class="btn yellow">
+          <p class="title">Yellow Balls (10)</p>
+          <p id='yelvalue' class="text-center text">? (+)</p>
+        </button>
+      </div>
 
+      <div class="cell yelminus">
+        <button onclick="decYel()" class="btn lightyellow"><p class = "text">(-)</p></button>
+      </div>
 
+      <div class="cell rampplus">
+        <button onclick="incRamp()" class="btn turq">
+          <p class="title">Ramp Hang (15)</p>
+          <p id='rampvalue' class="text-center text">? (+)</p>
+        </button>
+      </div>
+
+      <div class="cell rampminus">
+        <button onclick="decRamp()" class="btn lightturq"><p class = "text">(-)</p></button>
+      </div>
+
+      <div class="cell penplus">
+        <button onclick="incPen()" class="btn grey">
+          <p class="title">Penalties (-1)</p>
+          <p id='penvalue' class="text-center text">? (+)</p>
+        </button>
+      </div>
+
+      <div class="cell penminus">
+        <button onclick="decPen()" class="btn lightgrey"><p class = "text">(-)</p></button>
+      </div>
 
 
 
@@ -160,33 +265,25 @@
           document.getElementById('redvalue').innerHTML = values["red"] + "<br>(+)";
           document.getElementById('bluevalue').innerHTML = values["blue"] + "<br>(+)";
           document.getElementById('midvalue').innerHTML = values["mid"] + "<br>(+)";
+          document.getElementById('yelvalue').innerHTML = values["yellow"] + "<br>(+)";
+          document.getElementById('rampvalue').innerHTML = values["ramp"] + "<br>(+)";
+          document.getElementById('penvalue').innerHTML = values["penalty"] + "<br>(+)";
           console.log("I've received the numbers!");
         });
       });
 
-      function incRed() {
-        socket.emit("button", "red", 1);
-      }
-
-      function incBlue() {
-        socket.emit("button", "blue", 1);
-      }
-
-      function decRed() {
-        socket.emit("button", "red", -1);
-      }
-
-      function decBlue() {
-        socket.emit("button", "blue", -1);
-      }
-
-      function incMid() {
-        socket.emit("button", "mid", 1);
-      }
-
-      function decMid() {
-        socket.emit("button", "mid", -1);
-      }
+      function incRed() { socket.emit("button", "red", 1); }
+      function decRed() { socket.emit("button", "red", -1); }
+      function incBlue() { socket.emit("button", "blue", 1); }
+      function decBlue() { socket.emit("button", "blue", -1); }
+      function incMid() { socket.emit("button", "mid", 1); }
+      function decMid() { socket.emit("button", "mid", -1); }
+      function incYel() { socket.emit("button", "yellow", 1); }
+      function decYel() { socket.emit("button", "yellow", -1); }
+      function incRamp() { socket.emit("button", "ramp", 1); }
+      function decRamp() { socket.emit("button", "ramp", -1); }
+      function incPen() { socket.emit("button", "penalty", 1); }
+      function decPen() { socket.emit("button", "penalty", -1); }
 
 
     </script>
