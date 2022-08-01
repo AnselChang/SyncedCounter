@@ -32,8 +32,16 @@
       background-color: #fa6161;
     }
 
+    .light2red {
+      background-color: #FD8888;
+    }
+
     .blue {
       background-color: #4242f5;
+    }
+
+    .light2blue {
+      background-color: #A0A0FA;
     }
 
     .lightblue {
@@ -174,24 +182,24 @@
       grid-row: 5;
     }
 
-    .auton1 {
+    .auton0 {
       grid-column: 1;
       grid-row: 6;
     }
 
-    .auton2 {
+    .auton1 {
       grid-column: 2;
       grid-row: 6;
     }
 
-    .auton3 {
+    .auton2 {
       grid-column: 3;
       grid-row: 6;
     }
 
   </style>
   </head>
-  <body>
+  <body id='background'>
     <div class="container">
 
       <div class="cell redscore">
@@ -271,14 +279,14 @@
         <button onclick="decPen()" class="btn lightgrey"><p class = "text">(-)</p></button>
       </div>
 
+      <div class="cell auton0">
+        <button id='a1' onclick="auton0()" class="btn lightorange"><p class = "text title">Auton Loss (0)</p></button>
+      </div>
       <div class="cell auton1">
-        <button id='a1' onclick="auton1()" class="btn lightorange"><p class = "text title">Auton Loss (0)</p></button>
+        <button id='a2' onclick="auton1()" class="btn lightorange"><p class = "text title">Auton Tie (5)</p></button>
       </div>
       <div class="cell auton2">
-        <button id='a2' onclick="auton2()" class="btn lightorange"><p class = "text title">Auton Tie (5)</p></button>
-      </div>
-      <div class="cell auton3">
-        <button id='a3' onclick="auton3()" class="btn lightorange"><p class = "text title">Auton Win (10)</p></button>
+        <button id='a3' onclick="auton2()" class="btn lightorange"><p class = "text title">Auton Win (10)</p></button>
       </div>
 
 
@@ -288,7 +296,9 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
 
-      var side = "REDSIDE";
+      const RED = 0;
+      const BLUE = 1;
+      var side = RED;
       var socket = io();
       var clientValues = 0;
 
@@ -297,6 +307,9 @@
         // if values have not been initialized
         if (clientValues === 0) return;
 
+        document.getElementById('redtotal').innerHTML = clientValues[RED]["score"];
+        document.getElementById('bluetotal').innerHTML = clientValues[BLUE]["score"];
+
         document.getElementById('redvalue').innerHTML = clientValues[side]["red"] + "<br>(+)";
         document.getElementById('bluevalue').innerHTML = clientValues[side]["blue"] + "<br>(+)";
         document.getElementById('midvalue').innerHTML = clientValues[side]["mid"] + "<br>(+)";
@@ -304,11 +317,11 @@
         document.getElementById('rampvalue').innerHTML = clientValues[side]["ramp"] + "<br>(+)";
         document.getElementById('penvalue').innerHTML = clientValues[side]["penalty"] + "<br>(+)";
 
-        if (clientValues[side]["auton"] === 1) {
+        if (clientValues[side]["auton"] === 0) {
           document.getElementById('a1').style.backgroundColor = "#F2881F";
           document.getElementById('a2').style.backgroundColor = "#FBB269";
           document.getElementById('a3').style.backgroundColor = "#FBB269";
-        } else if (clientValues[side]["auton"] === 2) {
+        } else if (clientValues[side]["auton"] === 1) {
           document.getElementById('a1').style.backgroundColor = "#FBB269";
           document.getElementById('a2').style.backgroundColor = "#F2881F";
           document.getElementById('a3').style.backgroundColor = "#FBB269";
@@ -330,12 +343,14 @@
       });
 
       function setRed() {
-        side = "REDSIDE";
+        side = RED;
+        document.getElementById("background").style.backgroundColor = "#FD8888";
         updateHTML();
       }
 
       function setBlue() {
-        side = "BLUESIDE";
+        side = BLUE;
+        document.getElementById("background").style.backgroundColor = "#A0A0FA";
         updateHTML();
       }
 
@@ -352,9 +367,11 @@
       function incPen() { socket.emit("button", side, "penalty", 1); }
       function decPen() { socket.emit("button", side, "penalty", -1); }
 
+      function auton0() {socket.emit("auton", side, 0); }
       function auton1() {socket.emit("auton", side, 1); }
       function auton2() {socket.emit("auton", side, 2); }
-      function auton3() {socket.emit("auton", side, 3); }
+
+      setRed();
 
 
     </script>
