@@ -104,6 +104,16 @@
       padding: 0px;
     }
 
+    .redscore {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .bluescore {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
     .redplus {
       grid-column: 1;
       grid-row: 2;
@@ -183,6 +193,17 @@
   </head>
   <body>
     <div class="container">
+
+      <div class="cell redscore">
+        <button onclick="setRed()" class="btn red">
+          <p id="redtotal" class="text-center text">?</p>
+        </button>
+      </div>
+      <div class="cell bluescore">
+        <button onclick="setBlue()" class="btn blue">
+          <p id="bluetotal" class="text-center text">?</p>
+        </button>
+      </div>
 
       <div class="cell redplus">
         <button onclick="incRed()" class="btn red">
@@ -267,52 +288,73 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
 
+      var side = "REDSIDE";
       var socket = io();
+      var clientValues = 0;
+
+      function updateHTML() {
+
+        // if values have not been initialized
+        if (clientValues === 0) return;
+
+        document.getElementById('redvalue').innerHTML = clientValues[side]["red"] + "<br>(+)";
+        document.getElementById('bluevalue').innerHTML = clientValues[side]["blue"] + "<br>(+)";
+        document.getElementById('midvalue').innerHTML = clientValues[side]["mid"] + "<br>(+)";
+        document.getElementById('yelvalue').innerHTML = clientValues[side]["yellow"] + "<br>(+)";
+        document.getElementById('rampvalue').innerHTML = clientValues[side]["ramp"] + "<br>(+)";
+        document.getElementById('penvalue').innerHTML = clientValues[side]["penalty"] + "<br>(+)";
+
+        if (clientValues[side]["auton"] === 1) {
+          document.getElementById('a1').style.backgroundColor = "#F2881F";
+          document.getElementById('a2').style.backgroundColor = "#FBB269";
+          document.getElementById('a3').style.backgroundColor = "#FBB269";
+        } else if (clientValues[side]["auton"] === 2) {
+          document.getElementById('a1').style.backgroundColor = "#FBB269";
+          document.getElementById('a2').style.backgroundColor = "#F2881F";
+          document.getElementById('a3').style.backgroundColor = "#FBB269";
+        } else {
+          document.getElementById('a1').style.backgroundColor = "#FBB269";
+          document.getElementById('a2').style.backgroundColor = "#FBB269";
+          document.getElementById('a3').style.backgroundColor = "#F2881F";
+        }
+
+      }
 
       document.addEventListener("DOMContentLoaded", function(event) {
         socket.on('server broadcast', function (values) {
+
           console.log("Recieved data from server.");
-
-          document.getElementById('redvalue').innerHTML = values["red"] + "<br>(+)";
-          document.getElementById('bluevalue').innerHTML = values["blue"] + "<br>(+)";
-          document.getElementById('midvalue').innerHTML = values["mid"] + "<br>(+)";
-          document.getElementById('yelvalue').innerHTML = values["yellow"] + "<br>(+)";
-          document.getElementById('rampvalue').innerHTML = values["ramp"] + "<br>(+)";
-          document.getElementById('penvalue').innerHTML = values["penalty"] + "<br>(+)";
-
-          if (values["auton"] === 1) {
-            document.getElementById('a1').style.backgroundColor = "#F2881F";
-            document.getElementById('a2').style.backgroundColor = "#FBB269";
-            document.getElementById('a3').style.backgroundColor = "#FBB269";
-          } else if (values["auton"] === 2) {
-            document.getElementById('a1').style.backgroundColor = "#FBB269";
-            document.getElementById('a2').style.backgroundColor = "#F2881F";
-            document.getElementById('a3').style.backgroundColor = "#FBB269";
-          } else {
-            document.getElementById('a1').style.backgroundColor = "#FBB269";
-            document.getElementById('a2').style.backgroundColor = "#FBB269";
-            document.getElementById('a3').style.backgroundColor = "#F2881F";
-          }
-
+          clientValues = values;
+          updateHTML();
         });
       });
 
-      function incRed() { socket.emit("button", "red", 1); }
-      function decRed() { socket.emit("button", "red", -1); }
-      function incBlue() { socket.emit("button", "blue", 1); }
-      function decBlue() { socket.emit("button", "blue", -1); }
-      function incMid() { socket.emit("button", "mid", 1); }
-      function decMid() { socket.emit("button", "mid", -1); }
-      function incYel() { socket.emit("button", "yellow", 1); }
-      function decYel() { socket.emit("button", "yellow", -1); }
-      function incRamp() { socket.emit("button", "ramp", 1); }
-      function decRamp() { socket.emit("button", "ramp", -1); }
-      function incPen() { socket.emit("button", "penalty", 1); }
-      function decPen() { socket.emit("button", "penalty", -1); }
+      function setRed() {
+        side = "REDSIDE";
+        updateHTML();
+      }
 
-      function auton1() {socket.emit("auton", 1); }
-      function auton2() {socket.emit("auton", 2); }
-      function auton3() {socket.emit("auton", 3); }
+      function setBlue() {
+        side = "BLUESIDE";
+        updateHTML();
+      }
+
+      function incRed() { socket.emit("button", side, "red", 1); }
+      function decRed() { socket.emit("button", side, "red", -1); }
+      function incBlue() { socket.emit("button", side, "blue", 1); }
+      function decBlue() { socket.emit("button", side, "blue", -1); }
+      function incMid() { socket.emit("button", side, "mid", 1); }
+      function decMid() { socket.emit("button", side, "mid", -1); }
+      function incYel() { socket.emit("button", side, "yellow", 1); }
+      function decYel() { socket.emit("button", side, "yellow", -1); }
+      function incRamp() { socket.emit("button", side, "ramp", 1); }
+      function decRamp() { socket.emit("button", side, "ramp", -1); }
+      function incPen() { socket.emit("button", side, "penalty", 1); }
+      function decPen() { socket.emit("button", side, "penalty", -1); }
+
+      function auton1() {socket.emit("auton", side, 1); }
+      function auton2() {socket.emit("auton", side, 2); }
+      function auton3() {socket.emit("auton", side, 3); }
 
 
     </script>
