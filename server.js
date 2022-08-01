@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('button', (button, delta) => {
-        values[button] += delta;
+        values[button] = Math.max(0, values[button] + delta);
         emit();
     });
 
