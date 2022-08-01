@@ -1,0 +1,192 @@
+.text {
+    margin: 2px;
+    font-size: 3em;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 1em;
+  }
+
+  .btn {
+
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+    touch-action: manipulation;
+  }
+
+  .red {
+    background-color: #f54242;
+  }
+
+  .lightred {
+    background-color: #fa6161;
+  }
+
+  .light2red {
+    background-color: #FD8888;
+  }
+
+  .blue {
+    background-color: #4242f5;
+  }
+
+  .light2blue {
+    background-color: #A0A0FA;
+  }
+
+  .lightblue {
+    background-color: #7474fc;
+  }
+
+  .green {
+    background-color: #18db35;
+  }
+
+  .lightgreen {
+    background-color: #72ED84;
+  }
+
+  .yellow {
+    background-color: #FFF11A;
+  }
+
+  .lightyellow {
+    background-color: #FFF55E;
+  }
+
+  .turq {
+    background-color: #2DF8F0;
+  }
+
+  .lightturq {
+    background-color: #84FDF8;
+  }
+
+  .grey {
+    background-color: #8D8D8D;
+  }
+
+  .lightgrey {
+    background-color: #BCBCBC;
+  }
+
+  .orange {
+    background-color: #F2881F;
+  }
+
+  .lightorange {
+    background-color: #FBB269;
+  }
+
+  .container {
+    width: 92vw;
+    height: 97.5vh;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 3fr 1fr 3fr 1fr 1.3fr;
+
+    gap: 0px;
+    padding: 0px;
+    margin: 2%;
+    box-sizing: border-box;
+  }
+
+  .container div {
+    padding: 10px;
+    border: 1px black;
+  }
+
+  .cell {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .redscore {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .bluescore {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .redplus {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .redminus {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .blueplus {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .blueminus {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .midplus {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .midminus {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  .yelplus {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .yelminus {
+    grid-column: 1;
+    grid-row: 5;
+  }
+
+  .rampplus {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .rampminus {
+    grid-column: 2;
+    grid-row: 5;
+  }
+
+  .penplus {
+    grid-column: 3;
+    grid-row: 4;
+  }
+
+  .penminus {
+    grid-colum: 3;
+    grid-row: 5;
+  }
+
+  .auton0 {
+    grid-column: 1;
+    grid-row: 6;
+  }
+
+  .auton1 {
+    grid-column: 2;
+    grid-row: 6;
+  }
+
+  .auton2 {
+    grid-column: 3;
+    grid-row: 6;
+  }
