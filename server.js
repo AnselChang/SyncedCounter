@@ -14,6 +14,7 @@ var values = {
   "yellow" : 1,
   "ramp" : 0,
   "penalty" : 0,
+  "auton" : 1,
 };
 
 app.get('/', (req,res) => {
@@ -37,6 +38,11 @@ io.on('connection', (socket) => {
         values[button] = Math.max(0, values[button] + delta);
         if (button === "yellow" || button === "ramp") values[button] = Math.min(values[button], 4);
         emit();
+    });
+
+    socket.on('auton', (mode) => {
+      values["auton"] = mode;
+      emit();
     });
 
 });
