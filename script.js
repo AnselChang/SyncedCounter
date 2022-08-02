@@ -1,4 +1,4 @@
-/*const RED = 0;
+const RED = 0;
 const BLUE = 1;
 var side = RED;
 var socket = io();
@@ -56,7 +56,7 @@ function auton(num) {
     socket.emit("auton", side, num);
 }
 
-setRed();*/
+setRed();
 let mouseDown = false;
 function setMouseState(newState){
     mouseDown = newState
