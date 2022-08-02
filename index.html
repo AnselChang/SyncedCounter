@@ -382,17 +382,14 @@
         ctx.textAlign = 'center'
         ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2);
         if(mouseDown){
-            resetProgress++;
+            resetProgress+= 2;
             if(resetProgress > 150){
                 resetProgress = 150;
                 mouseDown = false;
                 resetScoring()
             }
         }else{
-            resetProgress--;
-            if(resetProgress < 0){
-                resetProgress = 0
-            }
+            resetProgress = 0
         }
         console.log(mouseDown)
     }
