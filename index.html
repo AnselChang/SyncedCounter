@@ -3,201 +3,7 @@
   <head>
     <meta name="viewport" content= "width=device-width, user-scalable=no">
     <title>Sync Counter</title>
-    <style>
-    .text {
-      margin: 2px;
-      font-size: 3em;
-      text-align: center;
-    }
-
-    .title {
-      font-size: 1em;
-    }
-
-    .btn {
-
-      border-radius: 10px;
-      height: 100%;
-      width: 100%;
-      padding: 0%;
-      margin: 0%;
-      touch-action: manipulation;
-    }
-
-    .red {
-      background-color: #f54242;
-    }
-
-    .lightred {
-      background-color: #fa6161;
-    }
-
-    .light2red {
-      background-color: #FD8888;
-    }
-
-    .blue {
-      background-color: #4242f5;
-    }
-
-    .light2blue {
-      background-color: #A0A0FA;
-    }
-
-    .lightblue {
-      background-color: #7474fc;
-    }
-
-    .green {
-      background-color: #18db35;
-    }
-
-    .lightgreen {
-      background-color: #72ED84;
-    }
-
-    .yellow {
-      background-color: #FFF11A;
-    }
-
-    .lightyellow {
-      background-color: #FFF55E;
-    }
-
-    .turq {
-      background-color: #2DF8F0;
-    }
-
-    .lightturq {
-      background-color: #84FDF8;
-    }
-
-    .grey {
-      background-color: #8D8D8D;
-    }
-
-    .lightgrey {
-      background-color: #BCBCBC;
-    }
-
-    .orange {
-      background-color: #F2881F;
-    }
-
-    .lightorange {
-      background-color: #FBB269;
-    }
-
-    .container {
-      width: 92vw;
-      height: 97.5vh;
-
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 1fr 3fr 1fr 3fr 1fr 1.3fr;
-
-      gap: 0px;
-      padding: 0px;
-      margin: 2%;
-      box-sizing: border-box;
-    }
-
-    .container div {
-      padding: 10px;
-      border: 1px black;
-    }
-
-    .cell {
-      margin: 0px;
-      padding: 0px;
-    }
-
-    .redscore {
-      grid-column: 2;
-      grid-row: 1;
-    }
-
-    .bluescore {
-      grid-column: 3;
-      grid-row: 1;
-    }
-
-    .redplus {
-      grid-column: 1;
-      grid-row: 2;
-    }
-
-    .redminus {
-      grid-column: 1;
-      grid-row: 3;
-    }
-
-    .blueplus {
-      grid-column: 2;
-      grid-row: 2;
-    }
-
-    .blueminus {
-      grid-column: 2;
-      grid-row: 3;
-    }
-
-    .midplus {
-      grid-column: 3;
-      grid-row: 2;
-    }
-
-    .midminus {
-      grid-column: 3;
-      grid-row: 3;
-    }
-
-    .yelplus {
-      grid-column: 1;
-      grid-row: 4;
-    }
-
-    .yelminus {
-      grid-column: 1;
-      grid-row: 5;
-    }
-
-    .rampplus {
-      grid-column: 2;
-      grid-row: 4;
-    }
-
-    .rampminus {
-      grid-column: 2;
-      grid-row: 5;
-    }
-
-    .penplus {
-      grid-column: 3;
-      grid-row: 4;
-    }
-
-    .penminus {
-      grid-colum: 3;
-      grid-row: 5;
-    }
-
-    .auton0 {
-      grid-column: 1;
-      grid-row: 6;
-    }
-
-    .auton1 {
-      grid-column: 2;
-      grid-row: 6;
-    }
-
-    .auton2 {
-      grid-column: 3;
-      grid-row: 6;
-    }
-
-  </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body id='background'>
     <div class="container">
@@ -212,171 +18,89 @@
           <p id="bluetotal" class="text-center text">?</p>
         </button>
       </div>
-
+      <div class="resetbtn">
+        <canvas id='resetCanvas' onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
+      </div>
       <div class="cell redplus">
-        <button onclick="incRed()" class="btn red">
+        <button onclick="changePoint('red',1)" class="btn red">
           <p class="title">Red Hole (5)</p>
           <p id='redvalue' class="text-center text">? (+)</p>
         </button>
       </div>
 
       <div class="cell redminus">
-        <button onclick="decRed()" class="btn lightred"><p class = "text">(-)</p></button>
+        <button onclick="changePoint('red',-1)" class="btn lightred"><p class = "text">(-)</p></button>
       </div>
 
       <div class="cell blueplus">
-        <button onclick="incBlue()" class="btn blue">
+        <button onclick="changePoint('blue',1)" class="btn blue">
           <p class="title">Blue Hole (3)</p>
           <p id='bluevalue' class="text-center text">? (+)</p>
         </button>
       </div>
 
       <div class="cell blueminus">
-        <button onclick="decBlue()" class="btn lightblue"><p class = "text">(-)</p></button>
+        <button onclick="changePoint('blue',-1)" class="btn lightblue"><p class = "text">(-)</p></button>
       </div>
 
       <div class="cell midplus">
-        <button onclick="incMid()" class="btn green">
+        <button onclick="changePoint('mid',1)" class="btn green">
           <p class="title">Top Hole (5)</p>
           <p id='midvalue' class="text-center text">? (+)</p>
         </button>
       </div>
 
       <div class="cell midminus">
-        <button onclick="decMid()" class="btn lightgreen"><p class = "text">(-)</p></button>
+        <button onclick="changePoint('mid',-1)" class="btn lightgreen"><p class = "text">(-)</p></button>
       </div>
 
       <div class="cell yelplus">
-        <button onclick="incYel()" class="btn yellow">
+        <button onclick="changePoint('yellow',1)" class="btn yellow">
           <p class="title">Yellow Balls (10)</p>
           <p id='yelvalue' class="text-center text">? (+)</p>
         </button>
       </div>
 
       <div class="cell yelminus">
-        <button onclick="decYel()" class="btn lightyellow"><p class = "text">(-)</p></button>
+        <button onclick="changePoint('yellow',-1)" class="btn lightyellow"><p class = "text">(-)</p></button>
       </div>
 
       <div class="cell rampplus">
-        <button onclick="incRamp()" class="btn turq">
+        <button onclick="changePoint('ramp',1)" class="btn turq">
           <p class="title">Ramp Hang (15)</p>
           <p id='rampvalue' class="text-center text">? (+)</p>
         </button>
       </div>
 
       <div class="cell rampminus">
-        <button onclick="decRamp()" class="btn lightturq"><p class = "text">(-)</p></button>
+        <button onclick="changePoint('ramp',-1)" class="btn lightturq"><p class = "text">(-)</p></button>
       </div>
 
       <div class="cell penplus">
-        <button onclick="incPen()" class="btn grey">
+        <button onclick="changePoint('penalty',1)" class="btn grey">
           <p class="title">Penalties (-1)</p>
           <p id='penvalue' class="text-center text">? (+)</p>
         </button>
       </div>
 
       <div class="cell penminus">
-        <button onclick="decPen()" class="btn lightgrey"><p class = "text">(-)</p></button>
+        <button onclick="changePoint('penalty',-1)" class="btn lightgrey"><p class = "text">(-)</p></button>
       </div>
 
       <div class="cell auton0">
-        <button id='a1' onclick="auton0()" class="btn lightorange"><p class = "text title">Auton Loss (0)</p></button>
+        <button id='a1' onclick="auton(0)" class="btn lightorange"><p class = "text title">Auton Loss (0)</p></button>
       </div>
       <div class="cell auton1">
-        <button id='a2' onclick="auton1()" class="btn lightorange"><p class = "text title">Auton Tie (5)</p></button>
+        <button id='a2' onclick="auton(1)" class="btn lightorange"><p class = "text title">Auton Tie (5)</p></button>
       </div>
       <div class="cell auton2">
-        <button id='a3' onclick="auton2()" class="btn lightorange"><p class = "text title">Auton Win (10)</p></button>
+        <button id='a3' onclick="auton(2)" class="btn lightorange"><p class = "text title">Auton Win (10)</p></button>
       </div>
-
-
 
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-
-      const RED = 0;
-      const BLUE = 1;
-      var side = RED;
-      var socket = io();
-      var clientValues = 0;
-
-      function updateHTML() {
-
-        // if values have not been initialized
-        if (clientValues === 0) return;
-
-        document.getElementById('redtotal').innerHTML = clientValues[RED]["score"];
-        document.getElementById('bluetotal').innerHTML = clientValues[BLUE]["score"];
-
-        document.getElementById('redvalue').innerHTML = clientValues[side]["red"] + "<br>(+)";
-        document.getElementById('bluevalue').innerHTML = clientValues[side]["blue"] + "<br>(+)";
-        document.getElementById('midvalue').innerHTML = clientValues[side]["mid"] + "<br>(+)";
-        document.getElementById('yelvalue').innerHTML = clientValues[side]["yellow"] + "<br>(+)";
-        document.getElementById('rampvalue').innerHTML = clientValues[side]["ramp"] + "<br>(+)";
-        document.getElementById('penvalue').innerHTML = clientValues[side]["penalty"] + "<br>(+)";
-
-        if (clientValues[side]["auton"] === 0) {
-          document.getElementById('a1').style.backgroundColor = "#F2881F";
-          document.getElementById('a2').style.backgroundColor = "#FBB269";
-          document.getElementById('a3').style.backgroundColor = "#FBB269";
-        } else if (clientValues[side]["auton"] === 1) {
-          document.getElementById('a1').style.backgroundColor = "#FBB269";
-          document.getElementById('a2').style.backgroundColor = "#F2881F";
-          document.getElementById('a3').style.backgroundColor = "#FBB269";
-        } else {
-          document.getElementById('a1').style.backgroundColor = "#FBB269";
-          document.getElementById('a2').style.backgroundColor = "#FBB269";
-          document.getElementById('a3').style.backgroundColor = "#F2881F";
-        }
-
-      }
-
-      document.addEventListener("DOMContentLoaded", function(event) {
-        socket.on('server broadcast', function (values) {
-
-          console.log("Recieved data from server.");
-          clientValues = values;
-          updateHTML();
-        });
-      });
-
-      function setRed() {
-        side = RED;
-        document.getElementById("background").style.backgroundColor = "#FFBABA";
-        document.getElementById("redbutton").style.borderWidth = "5px";
-        document.getElementById("bluebutton").style.borderWidth = "1px";
-        updateHTML();
-      }
-
-      function setBlue() {
-        side = BLUE;
-        document.getElementById("background").style.backgroundColor = "#D2D2FF";
-        document.getElementById("redbutton").style.borderWidth = "1px";
-        document.getElementById("bluebutton").style.borderWidth = "5px";
-        updateHTML();
-      }
-
-      function incRed() { socket.emit("button", side, "red", 1); }
-      function decRed() { socket.emit("button", side, "red", -1); }
-      function incBlue() { socket.emit("button", side, "blue", 1); }
-      function decBlue() { socket.emit("button", side, "blue", -1); }
-      function incMid() { socket.emit("button", side, "mid", 1); }
-      function decMid() { socket.emit("button", side, "mid", -1); }
-      function incYel() { socket.emit("button", side, "yellow", 1); }
-      function decYel() { socket.emit("button", side, "yellow", -1); }
-      function incRamp() { socket.emit("button", side, "ramp", 1); }
-      function decRamp() { socket.emit("button", side, "ramp", -1); }
-      function incPen() { socket.emit("button", side, "penalty", 1); }
-      function decPen() { socket.emit("button", side, "penalty", -1); }
-
-      function auton0() {socket.emit("auton", side, 0); }
-      function auton1() {socket.emit("auton", side, 1); }
-      function auton2() {socket.emit("auton", side, 2); }
-
-      setRed();
-
+    <script src="script.js">
 
     </script>
   </body>
