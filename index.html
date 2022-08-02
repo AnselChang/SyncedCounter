@@ -18,8 +18,8 @@
           <p id="bluetotal" class="text-center text">?</p>
         </button>
       </div>
-      <div class="resetbtn">
-        <canvas id='resetCanvas' onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
+      <div id='canvasParent' class="resetbtn">
+        <canvas width="10px" height="10px" id='resetCanvas' onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
       </div>
       <div class="cell redplus">
         <button onclick="changePoint('red',1)" class="btn red">
