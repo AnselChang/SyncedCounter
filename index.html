@@ -220,7 +220,7 @@
         </button>
       </div>
       <div class="resetbtn">
-        <canvas id='resetCanvas' class="btn" onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
+        <canvas id='resetCanvas' onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
       </div>
       <div class="cell redplus">
         <button onclick="changePoint('red',1)" class="btn red">
@@ -368,17 +368,33 @@
     }
     let resetProgress = 0
 
+    // define roundRect()
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+      if (w < 2 * r) r = w / 2;
+      if (h < 2 * r) r = h / 2;
+      this.beginPath();
+      this.moveTo(x+r, y);
+      this.arcTo(x+w, y,   x+w, y+h, r);
+      this.arcTo(x+w, y+h, x,   y+h, r);
+      this.arcTo(x,   y+h, x,   y,   r);
+      this.arcTo(x,   y,   x+w, y,   r);
+      this.closePath();
+      return this;
+    }
+
     function renderResetButton(){
         let canvas = document.getElementById('resetCanvas')
         let ctx = canvas.getContext('2d')
-        ctx.fillStyle = '#6c9149'
-        ctx.fillRect(0,0,canvas.offsetWidth,canvas.offsetHeight)
-        ctx.fillStyle = '#914949'
-        ctx.fillRect(0,0,canvas.offsetWidth*resetProgress/150,canvas.offsetHeight)
+        ctx.fillStyle = '#E0E0E0'
+        ctx.roundRect(0,0,canvas.offsetWidth,canvas.offsetHeight, 10).fill()
+        ctx.fillStyle = '#00FF00'
+        if (resetProgress > 0) {
+          ctx.roundRect(0,0,canvas.offsetWidth*resetProgress/150,canvas.offsetHeight, 10).fill()
+        }
         ctx.fillStyle = "#000000"
         ctx.font = "50px Arial";
         ctx.textAlign = 'center'
-        ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2);
+        ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2+25);
         if(mouseDown){
             resetProgress+= 2;
             if(resetProgress > 150){
