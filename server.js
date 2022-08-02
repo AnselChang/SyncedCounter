@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
       emit();
     });
 
-    socket.on('reset', 90 => {
+    socket.on('reset', () => {
       values = [
         {
           "red" : 0,
