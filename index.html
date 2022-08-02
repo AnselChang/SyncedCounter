@@ -219,8 +219,8 @@
           <p id="bluetotal" class="text-center text">?</p>
         </button>
       </div>
-      <div class="resetbtn">
-        <canvas id='resetCanvas' ontouchstart="setMouseState(true)" ontouchend="setMouseState(false)" onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
+      <div class="resetbtn" id='canvasParent'>
+        <canvas id='resetCanvas' width="0" height="0" ontouchstart="setMouseState(true)" ontouchend="setMouseState(false)" onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
       </div>
       <div class="cell redplus">
         <button onclick="changePoint('red',1)" class="btn red">
@@ -384,6 +384,8 @@
 
     function renderResetButton(){
         let canvas = document.getElementById('resetCanvas')
+        canvas.width = document.getElementById('canvasParent').offsetWidth-22
+        canvas.height = document.getElementById('canvasParent').offsetHeight-26
         let ctx = canvas.getContext('2d')
         ctx.fillStyle = '#C0C0C0'
         ctx.roundRect(0,0,canvas.offsetWidth,canvas.offsetHeight, 10).fill()
@@ -405,7 +407,6 @@
         }else{
             resetProgress = 0
         }
-        console.log(mouseDown)
     }
     let interval = setInterval(renderResetButton,10)
 
