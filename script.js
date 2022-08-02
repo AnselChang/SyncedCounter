@@ -67,15 +67,17 @@ function resetScoring(){
 }
 function renderResetButton(){
     let canvas = document.getElementById('resetCanvas')
+    canvas.width = document.getElementById('canvasParent').offsetWidth-22
+    canvas.height = document.getElementById('canvasParent').offsetHeight- 26
     let ctx = canvas.getContext('2d')
     ctx.fillStyle = '#6c9149'
     ctx.fillRect(0,0,canvas.offsetWidth,canvas.offsetHeight)
     ctx.fillStyle = '#914949'
     ctx.fillRect(0,0,canvas.offsetWidth*resetProgress/150,canvas.offsetHeight)
     ctx.fillStyle = "#000000"
-    ctx.font = "50px Arial";
+    ctx.font = "30px Arial";
     ctx.textAlign = 'center'
-    ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2);
+    ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2+10);
     if(mouseDown){
         resetProgress++;
         if(resetProgress > 150){
@@ -89,6 +91,6 @@ function renderResetButton(){
             resetProgress = 0
         }
     }
-    console.log(mouseDown)
+    //console.log(mouseDown)
 }
 let interval = setInterval(renderResetButton,10)
