@@ -35,6 +35,19 @@
         touch-action: manipulation;
       }
 
+      button {
+        border-width: 1px;
+      }
+
+      button:hover {
+        border-width: 3px;
+      }
+
+      button:active {
+        border-width: 5px;
+      }
+
+
       .red {
         background-color: #f54242;
       }
@@ -350,16 +363,16 @@
     function setRed() {
         side = RED;
         document.getElementById("background").style.backgroundColor = "#FFBABA";
-        document.getElementById("redbutton").style.borderWidth = "5px";
-        document.getElementById("bluebutton").style.borderWidth = "1px";
+        //document.getElementById("redbutton").style.borderWidth = "5px";
+        //document.getElementById("bluebutton").style.borderWidth = "1px";
         updateHTML();
     }
 
     function setBlue() {
         side = BLUE;
         document.getElementById("background").style.backgroundColor = "#D2D2FF";
-        document.getElementById("redbutton").style.borderWidth = "1px";
-        document.getElementById("bluebutton").style.borderWidth = "5px";
+        //document.getElementById("redbutton").style.borderWidth = "1px";
+        //document.getElementById("bluebutton").style.borderWidth = "5px";
         updateHTML();
     }
 
@@ -406,7 +419,7 @@
         ctx.fillStyle = "#000000"
         ctx.font = "30px Arial";
         ctx.textAlign = 'center'
-        ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2+15);
+        ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2+10);
         if(mouseDown){
             resetProgress += 1;
             if(resetProgress > 150){
