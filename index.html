@@ -220,7 +220,7 @@
         </button>
       </div>
       <div class="resetbtn">
-        <canvas id='resetCanvas' onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
+        <canvas id='resetCanvas' class="btn" onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
       </div>
       <div class="cell redplus">
         <button onclick="changePoint('red',1)" class="btn red">
@@ -367,9 +367,7 @@
         mouseDown = newState
     }
     let resetProgress = 0
-    function resetScoring(){
 
-    }
     function renderResetButton(){
         let canvas = document.getElementById('resetCanvas')
         let ctx = canvas.getContext('2d')
@@ -386,7 +384,7 @@
             if(resetProgress > 150){
                 resetProgress = 150;
                 mouseDown = false;
-                resetScoring()
+                socket.emit("reset");
             }
         }else{
             resetProgress = 0

@@ -71,6 +71,32 @@ io.on('connection', (socket) => {
       emit();
     });
 
+    socket.on('reset', 90 => {
+      values = [
+        {
+          "red" : 0,
+          "blue" : 0,
+          "mid" : 0,
+          "yellow" : 1,
+          "ramp" : 0,
+          "penalty" : 0,
+          "auton" : 0,
+          "score" : 0
+        },
+        {
+          "red" : 0,
+          "blue" : 0,
+          "mid" : 0,
+          "yellow" : 1,
+          "ramp" : 0,
+          "penalty" : 0,
+          "auton" : 0,
+          "score" : 0
+        }
+      ];
+      emit();
+    })
+
 });
 
 http.listen(port, () => {
