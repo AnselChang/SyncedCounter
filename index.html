@@ -385,7 +385,7 @@
     function renderResetButton(){
         let canvas = document.getElementById('resetCanvas')
         let ctx = canvas.getContext('2d')
-        ctx.fillStyle = '#E0E0E0'
+        ctx.fillStyle = '#C0C0C0'
         ctx.roundRect(0,0,canvas.offsetWidth,canvas.offsetHeight, 10).fill()
         ctx.fillStyle = '#00FF00'
         if (resetProgress > 0) {
@@ -394,9 +394,9 @@
         ctx.fillStyle = "#000000"
         ctx.font = "50px Arial";
         ctx.textAlign = 'center'
-        ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2+25);
+        ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2+15);
         if(mouseDown){
-            resetProgress+= 2;
+            resetProgress += 1;
             if(resetProgress > 150){
                 resetProgress = 150;
                 mouseDown = false;
