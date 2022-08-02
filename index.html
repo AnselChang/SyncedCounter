@@ -18,7 +18,9 @@
           <p id="bluetotal" class="text-center text">?</p>
         </button>
       </div>
-
+      <div class="resetbtn">
+        <canvas id='resetCanvas' onmousedown="setMouseState(true)" onmouseout="setMouseState(false)" onmouseup="setMouseState(false)"></canvas>
+      </div>
       <div class="cell redplus">
         <button onclick="changePoint('red',1)" class="btn red">
           <p class="title">Red Hole (5)</p>
@@ -94,8 +96,6 @@
       <div class="cell auton2">
         <button id='a3' onclick="auton(2)" class="btn lightorange"><p class = "text title">Auton Win (10)</p></button>
       </div>
-
-
 
     </div>
 

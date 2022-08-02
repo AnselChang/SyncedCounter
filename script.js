@@ -1,4 +1,4 @@
-const RED = 0;
+/*const RED = 0;
 const BLUE = 1;
 var side = RED;
 var socket = io();
@@ -22,9 +22,6 @@ function updateHTML() {
     }
     document.getElementById('a'+(clientValues[side]["auton"]+1)).style.backgroundColor = "#F2881F";
 
-}
-function resetScoring(){
-    
 }
 document.addEventListener("DOMContentLoaded", function(event) {
     socket.on('server broadcast', function(values) {
@@ -59,4 +56,39 @@ function auton(num) {
     socket.emit("auton", side, num);
 }
 
-setRed();
+setRed();*/
+let mouseDown = false;
+function setMouseState(newState){
+    mouseDown = newState
+}
+let resetProgress = 0
+function resetScoring(){
+
+}
+function renderResetButton(){
+    let canvas = document.getElementById('resetCanvas')
+    let ctx = canvas.getContext('2d')
+    ctx.fillStyle = '#6c9149'
+    ctx.fillRect(0,0,canvas.offsetWidth,canvas.offsetHeight)
+    ctx.fillStyle = '#914949'
+    ctx.fillRect(0,0,canvas.offsetWidth*resetProgress/150,canvas.offsetHeight)
+    ctx.fillStyle = "#000000"
+    ctx.font = "50px Arial";
+    ctx.textAlign = 'center'
+    ctx.fillText("Reset", canvas.offsetWidth/2, canvas.offsetHeight/2);
+    if(mouseDown){
+        resetProgress++;
+        if(resetProgress > 150){
+            resetProgress = 150;
+            mouseDown = false;
+            resetScoring()
+        }
+    }else{
+        resetProgress--;
+        if(resetProgress < 0){
+            resetProgress = 0
+        }
+    }
+    console.log(mouseDown)
+}
+let interval = setInterval(renderResetButton,10)
