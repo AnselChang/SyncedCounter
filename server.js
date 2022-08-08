@@ -37,8 +37,8 @@ app.get('/', (req,res) => {
 });
 
 function calcScore(team) {
-  values[team]["score"] = values[team]["red"]*5 + values[team]["blue"]*3 + values[team]["mid"]*5 + values[team]["yellow"]*10;
-  values[team]["score"] += values[team]["ramp"]*15 + values[team]["auton"]*5 - values[team]["penalty"];
+  values[team]["score"] = values[team]["red"]*6 + values[team]["blue"]*4 + values[team]["mid"]*3 + values[team]["yellow"]*10;
+  values[team]["score"] += values[team]["ramp"]*15 + values[team]["auton"]*5 - values[team]["penalty"]*2;
 }
 
 function emit() {
