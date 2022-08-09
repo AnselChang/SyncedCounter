@@ -97,8 +97,8 @@ io.on('connection', (socket) => {
       emit();
     })
 
-});
+  });
 
-http.listen(port, () => {
-    console.log("Listening on port: " + port);
+  http.listen(port, () => {
+      console.log("Listening on port: " + port);
 });
