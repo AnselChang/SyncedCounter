@@ -60,8 +60,9 @@ io.on('connection', (socket) => {
       console.log("button", side, button, delta);
       console.log(values);
       let newValue = values[side][button] + delta;
-      if (button === "yellow" || button === "ramp") values[side][button] = clamp(newValue, 0, 4);
-      else values[side][button] = Math.max(0, newValue);
+      if (button === "yellow" || button === "ramp") newValue = clamp(newValue, 0, 4);
+      else if (button == "mid" || button == "penalty") newValue = Math.max(0, newValue);
+      values[side][button] = newValue;
       emit();
     });
 
